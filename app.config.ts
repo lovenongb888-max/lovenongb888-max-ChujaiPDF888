@@ -32,7 +32,7 @@ const env = {
   appSlug: "pdf888",
   // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
   // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "",
+  logoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663940874778/GIGmIotobrXEGoER.png",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,
@@ -57,6 +57,7 @@ const publicRuntime = {
     process.env.EXPO_PUBLIC_APP_ID ??
     "",
   apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL ?? "",
+  updateManifestUrl: process.env.EXPO_PUBLIC_UPDATE_MANIFEST_URL ?? "",
 };
 
 const config: ExpoConfig = {
@@ -77,7 +78,7 @@ const config: ExpoConfig = {
   },
   android: {
     adaptiveIcon: {
-      backgroundColor: "#E6F4FE",
+      backgroundColor: "#0B766E",
       foregroundImage: "./assets/images/android-icon-foreground.png",
       backgroundImage: "./assets/images/android-icon-background.png",
       monochromeImage: "./assets/images/android-icon-monochrome.png",
@@ -107,6 +108,16 @@ const config: ExpoConfig = {
   plugins: [
     "expo-asset",
     "expo-router",
+    "expo-document-picker",
+    "expo-file-system",
+    "expo-sharing",
+    [
+      "expo-media-library",
+      {
+        photosPermission: "Allow PDF888 to save converted images to your photo library.",
+        savePhotosPermission: "Allow PDF888 to save converted images to your photo library.",
+      },
+    ],
     [
       "expo-audio",
       {
