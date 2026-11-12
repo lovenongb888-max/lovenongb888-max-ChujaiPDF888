@@ -1,0 +1,23 @@
+export default (context: ConfigContext): ExpoConfig => {
+  const { EAS_BUILD_PROFILE, EAS_BUILD_PLATFORM } = process.env;
+  const APP_NAME = "pdf888";
+  const name = (() => {
+    if (EAS_BUILD_PLATFORM === "ios") {
+      return APP_NAME;
+    }
+    switch (EAS_BUILD_PROFILE) {
+      case "staging":
+        return `${APP_NAME} (Staging)`;
+      case "production":
+        return APP_NAME;
+      case undefined:
+        return `${APP_NAME} (Dev)`;
+      default:
+        throw new Error(`Unknown EAS_BUILD_PROFILE: ${EAS_BUILD_PROFILE}`);
+    }
+  })();
+  return {
+    name,
+    /// ...otherFields
+  };
+};
